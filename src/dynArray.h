@@ -24,12 +24,12 @@ public:
 	}
 
 	//Element Access
-	inline reference at(int n) {
-		return vector.at(n);
+	inline reference at(size_type pos) {
+		return vector.at(pos);
 	}
 
-	inline const_reference at(int n) const {
-		return vector.at(n);
+	inline const_reference at(size_type pos) const {
+		return vector.at(pos);
 	}
 
 	inline reference operator[](size_type pos) {
