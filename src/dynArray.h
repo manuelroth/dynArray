@@ -49,6 +49,30 @@ public:
 
 	//Capacity
 
+	inline bool empty() const {
+		return vector.empty();
+	}
+
+	inline size_type size() const {
+		return vector.size();
+	}
+
+	inline size_type max_size() const {
+		return vector.max_size();
+	}
+
+	inline void reserve( size_type size ){
+		vector.reserve( size );
+	}
+
+	inline size_type capacity() const {
+		return vector.capacity();
+	}
+
+	inline void shrink_to_fit(){
+		vector.shrink_to_fit();
+	}
+
 	//Modifiers
 
 };
