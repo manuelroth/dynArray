@@ -21,12 +21,12 @@ struct dynArray {
 	}
 
 	//Element Access
-	inline reference at(int n) {
-		return vector.at(n);
+	inline reference at(size_type pos) {
+		return vector.at(pos);
 	}
 
-	inline const_reference at(int n) const {
-		return vector.at(n);
+	inline const_reference at(size_type pos) const {
+		return vector.at(pos);
 	}
 
 	inline reference operator[](size_type pos) {
@@ -74,7 +74,7 @@ struct dynArray {
 		return vector.rbegin();
 	}
 
-	inline const_reverse_iterator rbegin() {
+	inline const_reverse_iterator rbegin() const{
 		return vector.crbegin();
 	}
 
@@ -98,7 +98,7 @@ struct dynArray {
 		return vector.rend();
 	}
 
-	inline const_reverse_iterator rend() {
+	inline const_reverse_iterator rend() const{
 		return vector.crend();
 	}
 
