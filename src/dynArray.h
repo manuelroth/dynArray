@@ -2,6 +2,7 @@
 #define DYNARRAY_H_
 
 #include <vector>
+#include <initializer_list>
 
 template<typename T>
 class dynArray {
@@ -9,33 +10,54 @@ class dynArray {
 	using value_type = typename array_type::value_type;
 	using iterator = typename array_type::iterator;
 	using reference = typename array_type::reference;
+	using const_reference = typename array_type::const_reference;
 	using size_type = typename array_type::size_type;
 
 
 	array_type vector { };
 
 public:
+	dynArray(std::initializer_list<T> init) : vector(init) { }
+
 	inline void push_back(value_type const& val) {
 		vector.push_back(val);
 	}
 
 	//Element Access
-
 	inline reference at(int n) {
 		return vector.at(n);
 	}
 
-	inline reference back() {
-		return vector.back();
+	inline const_reference at(int n) const {
+		return vector.at(n);
+	}
+
+	inline reference operator[](size_type pos) {
+			return vector[pos];
+	}
+
+	inline const_reference operator[](size_type pos) const {
+		return vector[pos];
 	}
 
 	inline reference front() {
 		return vector.front();
 	}
 
-	inline reference operator[](int pos) {
-		return vector[pos];
+	inline const_reference front() const {
+		return vector.front();
 	}
+
+	inline reference back() {
+		return vector.back();
+	}
+
+	inline const_reference back() const {
+		return vector.back();
+	}
+
+	T* data();
+	const T* data() const;
 
 	//Iterators
 
