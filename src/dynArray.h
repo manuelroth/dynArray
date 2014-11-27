@@ -2,6 +2,7 @@
 #define DYNARRAY_H_
 
 #include <vector>
+#include <initializer_list>
 
 template<typename T>
 class dynArray {
@@ -16,6 +17,8 @@ class dynArray {
 	array_type vector { };
 
 public:
+	dynArray(std::initializer_list<T> init) : vector(init) { }
+
 	inline void push_back(value_type const& val) {
 		vector.push_back(val);
 	}
