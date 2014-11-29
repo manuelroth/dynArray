@@ -79,6 +79,54 @@ void testAtThrowsError() {
 	ASSERT_THROWS(v.at(2), std::out_of_range);
 }
 
+void testIndexFirstElement() {
+	dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(1, v[0]);
+}
+
+void testIndexLastElement() {
+	dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(5, v[4]);
+}
+
+void testIndexFirstElementConst() {
+	const dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(1, v[0]);
+}
+
+void testIndexLastElementConst() {
+	const dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(5, v[4]);
+}
+
+void testNegativeIndexFirstElement() {
+	dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(1, v[-(v.size())]);
+}
+
+void testNegativeIndexLastElement() {
+	dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(5, v[-1]);
+}
+
+void testNegativeIndexFirstElementConst() {
+	const dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(1, v[-(v.size())]);
+}
+
+void testNegativeIndexLastElementConst() {
+	const dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(5, v[-1]);
+}
+
 void testFront() {
 	dynArray<int> v { 1, 2 };
 
@@ -314,6 +362,14 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(testReverseIteratorConstructor));
 	s.push_back(CUTE(testConstReverseIteratorConstructor));
 	s.push_back(CUTE(testmakedynArray));
+	s.push_back(CUTE(testNegativeIndexLastElement));
+	s.push_back(CUTE(testNegativeIndexFirstElement));
+	s.push_back(CUTE(testIndexFirstElement));
+	s.push_back(CUTE(testIndexLastElement));
+	s.push_back(CUTE(testIndexFirstElementConst));
+	s.push_back(CUTE(testIndexLastElementConst));
+	s.push_back(CUTE(testNegativeIndexFirstElementConst));
+	s.push_back(CUTE(testNegativeIndexLastElementConst));
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<> > lis(xmlfile.out);
 	cute::makeRunner(lis, argc, argv)(s, "AllTests");

@@ -62,12 +62,20 @@ struct dynArray {
 		return vector.at(pos);
 	}
 
-	inline reference operator[](size_type pos) {
-		return vector[pos];
+	inline reference operator[](signed int pos) {
+		if (pos < 0) {
+			return *(vector.end() + pos);
+		} else {
+			return vector.at(pos);
+		}
 	}
 
-	inline const_reference operator[](size_type pos) const {
-		return vector[pos];
+	inline const_reference operator[](signed int pos) const {
+		if (pos < 0) {
+			return *(vector.end() + pos);
+		} else {
+			return vector.at(pos);
+		}
 	}
 
 	inline reference front() {
