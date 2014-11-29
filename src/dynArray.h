@@ -66,7 +66,7 @@ struct dynArray {
 		return vector.cbegin();
 	}
 
-	inline const_iterator cbegin() {
+	inline const_iterator cbegin() const {
 		return vector.cbegin();
 	}
 
@@ -74,7 +74,7 @@ struct dynArray {
 		return vector.rbegin();
 	}
 
-	inline const_reverse_iterator rbegin() const{
+	inline const_reverse_iterator rbegin() const {
 		return vector.crbegin();
 	}
 
@@ -98,7 +98,7 @@ struct dynArray {
 		return vector.rend();
 	}
 
-	inline const_reverse_iterator rend() const{
+	inline const_reverse_iterator rend() const {
 		return vector.crend();
 	}
 
@@ -152,10 +152,6 @@ struct dynArray {
 
 	inline void resize(size_type count) {
 		vector.resize(count);
-	}
-
-	inline void resize(size_type count, value_type value = value_type()) {
-		vector.resize(count, value);
 	}
 
 	inline void resize(size_type count, const value_type& value) {

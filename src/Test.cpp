@@ -5,7 +5,7 @@
 #include "cute_runner.h"
 #include <vector>
 #include <stdexcept>
-
+#include <string>
 
 //Element Access
 void testAt() {
@@ -51,6 +51,78 @@ void testBackConst() {
 }
 
 //Iterators
+
+void testIteratorBegin() {
+	dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL("b", *(v.begin() + 1));
+}
+
+void testIteratorBeginConst() {
+	const dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL("a", *v.begin());
+}
+
+void testConstIteratorBeginConst() {
+	const dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL("b", *(v.cbegin() + 1));
+}
+
+void testReverseIteratorBegin() {
+	dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL("d", *v.rbegin());
+}
+
+void testReverseIteratorBeginConst() {
+	const dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL("c", *(v.rbegin() + 1));
+}
+
+void testConstReverseIteratorBeginConst() {
+	const dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL("b", *(v.crbegin() + 2));
+}
+
+void testIteratorEnd() {
+	dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL("d", *(v.end() - 1));
+}
+
+void testIteratorEndConst() {
+	const dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL("c", *(v.end() - 2));
+}
+
+void testConstIteratorEndConst() {
+	const dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL("b", *(v.cend() - 3));
+}
+
+void testReverseIteratorEnd() {
+	dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL("a", *(v.rend() - 1));
+}
+
+void testReverseIteratorEndConst() {
+	const dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL("b", *(v.rend() - 2));
+}
+
+void testConstReverseIteratorEndConst() {
+	const dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL("c", *(v.crend() - 3));
+}
 
 //Capacity
 
@@ -132,8 +204,19 @@ void testPopBack() {
 }
 
 void testResize() {
-	dynArray<int> v { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	dynArray<int> v { 1, 2, 3, 4, 5 };
 
+	v.resize(10);
+
+	ASSERT_EQUAL(10, v.capacity());
+}
+
+void testResizeWithValue() {
+	dynArray<double> v { 1, 2, 3, 4, 5 };
+
+	v.resize(10, 5);
+
+	ASSERT_EQUAL(5, v.at(9));
 }
 
 void runAllTests(int argc, char const *argv[]) {
@@ -156,6 +239,20 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(testFrontConst));
 	s.push_back(CUTE(testAtConst));
 	s.push_back(CUTE(testAtThrowsError));
+	s.push_back(CUTE(testResize));
+	s.push_back(CUTE(testResizeWithValue));
+	s.push_back(CUTE(testIteratorBegin));
+	s.push_back(CUTE(testIteratorBeginConst));
+	s.push_back(CUTE(testReverseIteratorBegin));
+	s.push_back(CUTE(testReverseIteratorBeginConst));
+	s.push_back(CUTE(testIteratorEnd));
+	s.push_back(CUTE(testIteratorEndConst));
+	s.push_back(CUTE(testConstIteratorEndConst));
+	s.push_back(CUTE(testConstReverseIteratorBeginConst));
+	s.push_back(CUTE(testConstIteratorBeginConst));
+	s.push_back(CUTE(testReverseIteratorEnd));
+	s.push_back(CUTE(testReverseIteratorEndConst));
+	s.push_back(CUTE(testConstReverseIteratorEndConst));
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<> > lis(xmlfile.out);
 	cute::makeRunner(lis, argc, argv)(s, "AllTests");
