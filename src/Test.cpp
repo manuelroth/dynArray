@@ -7,6 +7,59 @@
 #include <stdexcept>
 #include <string>
 
+void testDefaultConstructor() {
+	dynArray<std::string> v { };
+
+	ASSERT(v.empty());
+}
+
+void testInitializerListConstructor() {
+	dynArray<std::string> v { "a", "b", "c", "d" };
+
+	ASSERT_EQUAL(4, v.size());
+}
+
+void testCountValueConstructor() {
+	dynArray<std::string> v(5, "abcd");
+
+	ASSERT_EQUAL("abcd", v.at(4));
+}
+
+void testIteratorConstructor() {
+	dynArray<std::string> v1 { "a", "b", "c", "d" };
+	dynArray<std::string> v2(v1.begin(), v1.end());
+
+	ASSERT_EQUAL("d", v2.at(3));
+}
+
+void testConstIteratorConstructor() {
+	const dynArray<std::string> v1 { "a", "b", "c", "d" };
+	dynArray<std::string> v2(v1.cbegin(), v1.cend());
+
+	ASSERT_EQUAL("a", v2.at(0));
+}
+
+void testReverseIteratorConstructor() {
+	dynArray<std::string> v1 { "a", "b", "c", "d", "e" };
+	dynArray<std::string> v2(v1.rbegin(), v1.rend());
+
+	ASSERT_EQUAL("a", v2.at(4));
+}
+
+void testConstReverseIteratorConstructor() {
+	const dynArray<std::string> v1 { "a", "b", "c", "d", "e" };
+	dynArray<std::string> v2(v1.rbegin(), v1.rend());
+
+	ASSERT_EQUAL("e", v2.at(0));
+}
+
+void testmakedynArray() {
+	dynArray<std::string> v1 { };
+	dynArray<std::string> v2 = v1.makedynArray( { "a", "b", "c", "d" });
+
+	ASSERT_EQUAL("d", v2.at(3));
+}
+
 //Element Access
 void testAt() {
 	dynArray<int> v { 1, 2 };
@@ -253,6 +306,14 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(testReverseIteratorEnd));
 	s.push_back(CUTE(testReverseIteratorEndConst));
 	s.push_back(CUTE(testConstReverseIteratorEndConst));
+	s.push_back(CUTE(testDefaultConstructor));
+	s.push_back(CUTE(testInitializerListConstructor));
+	s.push_back(CUTE(testCountValueConstructor));
+	s.push_back(CUTE(testIteratorConstructor));
+	s.push_back(CUTE(testConstIteratorConstructor));
+	s.push_back(CUTE(testReverseIteratorConstructor));
+	s.push_back(CUTE(testConstReverseIteratorConstructor));
+	s.push_back(CUTE(testmakedynArray));
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<> > lis(xmlfile.out);
 	cute::makeRunner(lis, argc, argv)(s, "AllTests");

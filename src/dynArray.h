@@ -16,8 +16,41 @@ struct dynArray {
 	using const_reference = typename array_type::const_reference;
 	using size_type = typename array_type::size_type;
 
+	dynArray() :
+			vector() {
+	}
+
 	dynArray(std::initializer_list<T> init) :
 			vector(init) {
+	}
+
+	dynArray(int count, value_type value) :
+			vector(count, value) {
+
+	}
+
+	dynArray(iterator begin, iterator end) :
+			vector(begin, end) {
+
+	}
+
+	dynArray(const_iterator cbegin, const_iterator cend) :
+			vector(cbegin, cend) {
+
+	}
+
+	dynArray(reverse_iterator rbegin, reverse_iterator rend) :
+			vector(rbegin, rend) {
+
+	}
+
+	dynArray(const_reverse_iterator crbegin, const_reverse_iterator crend) :
+			vector(crbegin, crend) {
+
+	}
+
+	dynArray<value_type> makedynArray(std::initializer_list<T> init) {
+		return dynArray(init);
 	}
 
 	//Element Access
@@ -160,7 +193,6 @@ struct dynArray {
 
 private:
 	array_type vector { };
-
 };
 
 #endif
