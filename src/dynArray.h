@@ -25,7 +25,7 @@ struct dynArray {
 			vector(init) {
 	}
 
-	dynArray(int count, value_type value) :
+	dynArray(size_type count, value_type value) :
 			vector(count, value) {
 
 	}
