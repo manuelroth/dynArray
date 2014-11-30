@@ -15,6 +15,7 @@ struct dynArray {
 	using reference = typename array_type::reference;
 	using const_reference = typename array_type::const_reference;
 	using size_type = typename array_type::size_type;
+	using difference_type = typename array_type::difference_type;
 
 	dynArray() :
 			vector() {
@@ -62,7 +63,7 @@ struct dynArray {
 		return vector.at(pos);
 	}
 
-	inline reference operator[](signed int pos) {
+	inline reference operator[](difference_type pos) {
 		if (pos < 0) {
 			return *(vector.end() + pos);
 		} else {
@@ -70,7 +71,7 @@ struct dynArray {
 		}
 	}
 
-	inline const_reference operator[](signed int pos) const {
+	inline const_reference operator[](difference_type pos) const {
 		if (pos < 0) {
 			return *(vector.end() + pos);
 		} else {
