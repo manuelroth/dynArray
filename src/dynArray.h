@@ -55,43 +55,43 @@ struct dynArray {
 	}
 
 	//Element Access
-	inline reference at(size_type pos) {
+	reference at(size_type pos) {
 		return vector.at(pos);
 	}
 
-	inline const_reference at(size_type pos) const {
+	const_reference at(size_type pos) const {
 		return vector.at(pos);
 	}
 
-	inline reference operator[](difference_type pos) {
+	reference operator[](difference_type pos) {
 		if (pos < 0) {
-			return *(vector.end() + pos);
+			return *(end() + pos);
 		} else {
-			return vector.at(pos);
+			return at(pos);
 		}
 	}
 
-	inline const_reference operator[](difference_type pos) const {
+	const_reference operator[](difference_type pos) const {
 		if (pos < 0) {
-			return *(vector.end() + pos);
+			return *(cend() + pos);
 		} else {
-			return vector.at(pos);
+			return at(pos);
 		}
 	}
 
-	inline reference front() {
+	reference front() {
 		return vector.front();
 	}
 
-	inline const_reference front() const {
+	const_reference front() const {
 		return vector.front();
 	}
 
-	inline reference back() {
+	reference back() {
 		return vector.back();
 	}
 
-	inline const_reference back() const {
+	const_reference back() const {
 		return vector.back();
 	}
 
@@ -100,103 +100,103 @@ struct dynArray {
 
 	//Iterators
 
-	inline iterator begin() {
+	iterator begin() {
 		return vector.begin();
 	}
 
-	inline const_iterator begin() const {
+	const_iterator begin() const {
 		return vector.cbegin();
 	}
 
-	inline const_iterator cbegin() const {
+	const_iterator cbegin() const {
 		return vector.cbegin();
 	}
 
-	inline reverse_iterator rbegin() {
+	reverse_iterator rbegin() {
 		return vector.rbegin();
 	}
 
-	inline const_reverse_iterator rbegin() const {
+	const_reverse_iterator rbegin() const {
 		return vector.crbegin();
 	}
 
-	inline const_reverse_iterator crbegin() const {
+	const_reverse_iterator crbegin() const {
 		return vector.crbegin();
 	}
 
-	inline iterator end() {
+	iterator end() {
 		return vector.end();
 	}
 
-	inline const_iterator end() const {
+	const_iterator end() const {
 		return vector.cend();
 	}
 
-	inline const_iterator cend() const {
+	const_iterator cend() const {
 		return vector.cend();
 	}
 
-	inline reverse_iterator rend() {
+	reverse_iterator rend() {
 		return vector.rend();
 	}
 
-	inline const_reverse_iterator rend() const {
+	const_reverse_iterator rend() const {
 		return vector.crend();
 	}
 
-	inline const_reverse_iterator crend() const {
+	const_reverse_iterator crend() const {
 		return vector.crend();
 	}
 
 	//Capacity
 
-	inline bool empty() const {
+	bool empty() const {
 		return vector.empty();
 	}
 
-	inline size_type size() const {
+	size_type size() const {
 		return vector.size();
 	}
 
-	inline size_type capacity() const {
+	size_type capacity() const {
 		return vector.capacity();
 	}
 
 	//Modifiers
 
-	inline void clear() {
+	void clear() {
 		vector.clear();
 	}
 
-	inline iterator erase(iterator pos) {
+	iterator erase(iterator pos) {
 		return vector.erase(pos);
 	}
 
-	inline iterator erase(const_iterator pos) {
+	iterator erase(const_iterator pos) {
 		return vector.erase(pos);
 	}
 
-	inline iterator erase(iterator first, iterator last) {
+	iterator erase(iterator first, iterator last) {
 		return vector.erase(first, last);
 	}
 
-	inline iterator erase(const_iterator first, const_iterator last) {
+	iterator erase(const_iterator first, const_iterator last) {
 		return vector.erase(first, last);
 	}
 
-	inline void push_back(const value_type& value) {
+	void push_back(const value_type& value) {
 		vector.push_back(value);
 	}
 
-	inline void pop_back() {
+	void pop_back() {
 		vector.pop_back();
 	}
 
-	inline void resize(size_type count) {
+	void resize(size_type count) {
 		vector.resize(count);
 	}
 
-	inline void resize(size_type count, const value_type& value) {
+	void resize(size_type count, const value_type& value) {
 		vector.resize(count, value);
 	}
 

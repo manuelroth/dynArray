@@ -225,6 +225,21 @@ void testConstReverseIteratorEndConst() {
 	ASSERT_EQUAL("c", *(v.crend() - 3));
 }
 
+void testDistanceAlgorithm(){
+	dynArray<std::string> v {"e1", "e2"};
+	auto actual = std::distance(v.end(), v.begin());
+	ASSERT_EQUAL(-2, actual);
+}
+
+void testCopyAlgorithm(){
+	dynArray<std::string> v1 {"e1", "e2"};
+	dynArray<std::string> v2(2, "");
+
+	std::copy(v1.begin(), v1.end(), v2.begin());
+
+	ASSERT_EQUAL(2, v2.size());
+}
+
 //Capacity
 
 void testEmpty() {
@@ -370,6 +385,8 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(testIndexLastElementConst));
 	s.push_back(CUTE(testNegativeIndexFirstElementConst));
 	s.push_back(CUTE(testNegativeIndexLastElementConst));
+	s.push_back(CUTE(testDistanceAlgorithm));
+	s.push_back(CUTE(testCopyAlgorithm));
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<> > lis(xmlfile.out);
 	cute::makeRunner(lis, argc, argv)(s, "AllTests");
