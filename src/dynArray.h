@@ -51,28 +51,28 @@ struct dynArray {
 	}
 
 	//Element Access
-	reference at(size_type pos) {
-		return vector.at(pos);
+	reference at(difference_type pos) {
+		if(pos < 0){
+			return *(end() + pos);
+		}else{
+			return vector.at(pos);
+		}
 	}
 
-	const_reference at(size_type pos) const {
-		return vector.at(pos);
+	const_reference at(difference_type pos) const {
+		if(pos < 0){
+			return *(end() + pos);
+		}else{
+			return vector.at(pos);
+		}
 	}
 
 	reference operator[](difference_type pos) {
-		if (pos < 0) {
-			return *(end() + pos);
-		} else {
-			return at(pos);
-		}
+		return at(pos);
 	}
 
 	const_reference operator[](difference_type pos) const {
-		if (pos < 0) {
-			return *(cend() + pos);
-		} else {
-			return at(pos);
-		}
+		return at(pos);
 	}
 
 	reference front() {

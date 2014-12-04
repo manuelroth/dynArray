@@ -72,6 +72,36 @@ void testAtConst() {
 	ASSERT_EQUAL(2, v.at(1));
 }
 
+void testAtLastElementConst() {
+	const dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(5, v.at(4));
+}
+
+void testAtNegativeIndexFirstElement() {
+	dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(1, v.at(-(v.size())));
+}
+
+void testAtNegativeIndexLastElement() {
+	dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(5, v.at(-1));
+}
+
+void testAtNegativeIndexFirstElementConst() {
+	const dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(1, v.at(-(v.size())));
+}
+
+void testAtNegativeIndexLastElementConst() {
+	const dynArray<int> v { 1, 2, 3, 4, 5 };
+
+	ASSERT_EQUAL(5, v.at(-1));
+}
+
 void testAtThrowsError() {
 	dynArray<int> v { 1, 2 };
 
@@ -386,6 +416,11 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(testNegativeIndexLastElementConst));
 	s.push_back(CUTE(testDistanceAlgorithm));
 	s.push_back(CUTE(testCopyAlgorithm));
+	s.push_back(CUTE(testAtLastElementConst));
+	s.push_back(CUTE(testAtNegativeIndexFirstElement));
+	s.push_back(CUTE(testAtNegativeIndexLastElement));
+	s.push_back(CUTE(testAtNegativeIndexFirstElementConst));
+	s.push_back(CUTE(testAtNegativeIndexLastElementConst));
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<> > lis(xmlfile.out);
 	cute::makeRunner(lis, argc, argv)(s, "AllTests");
