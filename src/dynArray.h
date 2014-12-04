@@ -91,14 +91,6 @@ struct dynArray {
 		return vector.back();
 	}
 
-	T* data() {
-		return vector.data();
-	}
-
-	const T* data() const {
-		return vector.data();
-	}
-
 	//Iterators
 
 	iterator begin() {
