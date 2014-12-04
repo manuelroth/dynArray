@@ -59,6 +59,16 @@ void testmakedynArray() {
 	ASSERT_EQUAL("d", v.at(3));
 }
 
+void testDataAccess() {
+	dynArray<std::string> v { "a", "b", "c", "d", "e" };
+	ASSERT_EQUAL("a", *v.data());
+}
+
+void testDataAccessConst() {
+	const dynArray<std::string> v { "a", "b", "c", "d", "e" };
+	ASSERT_EQUAL("a", *v.data());
+}
+
 //Element Access
 void testAt() {
 	dynArray<int> v { 1, 2 };
@@ -386,6 +396,8 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(testNegativeIndexLastElementConst));
 	s.push_back(CUTE(testDistanceAlgorithm));
 	s.push_back(CUTE(testCopyAlgorithm));
+	s.push_back(CUTE(testDataAccess));
+	s.push_back(CUTE(testDataAccessConst));
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<> > lis(xmlfile.out);
 	cute::makeRunner(lis, argc, argv)(s, "AllTests");
