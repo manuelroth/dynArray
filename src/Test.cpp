@@ -54,10 +54,9 @@ void testConstReverseIteratorConstructor() {
 }
 
 void testmakedynArray() {
-	dynArray<std::string> v1 { };
-	dynArray<std::string> v2 = v1.makedynArray( { "a", "b", "c", "d" });
+	dynArray<std::string> v = makedynArray<std::string>({ "a", "b", "c", "d" });
 
-	ASSERT_EQUAL("d", v2.at(3));
+	ASSERT_EQUAL("d", v.at(3));
 }
 
 //Element Access

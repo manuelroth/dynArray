@@ -50,10 +50,6 @@ struct dynArray {
 
 	}
 
-	dynArray<value_type> makedynArray(std::initializer_list<T> init) {
-		return dynArray(init);
-	}
-
 	//Element Access
 	reference at(size_type pos) {
 		return vector.at(pos);
@@ -203,6 +199,11 @@ struct dynArray {
 private:
 	array_type vector { };
 };
+
+template<typename T>
+dynArray<T> makedynArray(std::initializer_list<T> init) {
+	return dynArray<T>(init);
+}
 
 #endif
 
